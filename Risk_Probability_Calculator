@@ -14,18 +14,18 @@ prob_1_2 = prob_1_1**2 # The probability that one attacker's dice beats two defe
 
 #double deaths
 
-prob_2_2_k2 =  prob_1_1 ** 2
+prob_2_2_k2 =  prob_1_1 ** 2  #The probability that two attacker's dice kills two defenders
 
-prob_2_2_k0 = (1 - prob_1_1) ** 2
+prob_2_2_k0 = (1 - prob_1_1) ** 2  #The probability that two attacker's dice kills zero defenders
 
-prob_2_2_k1 = 2 * (1 - prob_1_1) * prob_1_1
+prob_2_2_k1 = 2 * (1 - prob_1_1) * prob_1_1  #The probability that two attacker's dice kills one defenders
 
 
-prob_3_2_k2 = prob_1_1 * prob_2_1
+prob_3_2_k2 = prob_1_1 * prob_2_1   #The probability that three attacker's dice kills two defenders
 
-prob_3_2_k0 = (1-prob_1_1) * (1-prob_2_1)
+prob_3_2_k0 = (1-prob_1_1) * (1-prob_2_1)   #The probability that three attacker's dice kills zero defenders
 
-prob_3_2_k1 = prob_1_1 * (1-prob_2_1) + (1-prob_1_1) * prob_2_1
+prob_3_2_k1 = prob_1_1 * (1-prob_2_1) + (1-prob_1_1) * prob_2_1    #The probability that three attacker's dice kills one defenders
 
 
 def probability_calculator(a,d):
