@@ -96,7 +96,7 @@ def power_lists(a, d, m):
         list_y =
 
 
-
+#comment
         pass
     elif a>=3 and a-m==1:
         pass
