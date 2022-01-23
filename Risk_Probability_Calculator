@@ -30,16 +30,4 @@ prob_3_2_k1 = prob_1_1 * (1-prob_2_1) + (1-prob_1_1) * prob_2_1
 
 def probability_calculator(a,d):
     '''Returns the probability that a attackers beats d defenders'''
-    if a>=3 and d>=2:
-        return None
-    elif a==2 and d>=2:
-        return None
-    elif a==1 and d>=2:
-        return None
-
-    elif a >= 3 and d == 1:
-        return None
-    elif a == 2 and d >= 1:
-        return None
-    elif a == 1 and d >= 1:
-        return None
+    return None
