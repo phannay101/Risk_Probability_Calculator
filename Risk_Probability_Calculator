@@ -1,33 +1,135 @@
-
+import numpy as np
 
 #single deaths
 
-prob_1_1 = 1-((1/6)**2)*(1+2+3+4+5+6) # The probability that one attacker's dice beats one defender's dice
+prob_1_1 = 1-((1/6)**2)*(1+2+3+4+5+6)
+# The probability that one attacker's dice beats one defender's dice
 
-prob_2_1 = 1-(1-prob_1_1)**2 # The probability that two attacker's dice beats one defender's dice
+prob_2_1 = 1-(1-prob_1_1)**2
+# The probability that two attacker's dice beats one defender's dice
 
-prob_3_1 = 1-(1-prob_1_1)**3 # The probability that three attacker's dice beats one defender's dice
+prob_3_1 = 1-(1-prob_1_1)**3
+# The probability that three attacker's dice beats one defender's dice
 
-prob_1_2 = prob_1_1**2 # The probability that one attacker's dice beats two defender's dice
+prob_1_2 = prob_1_1**2
+# The probability that one attacker's dice beats two defender's dice
 
 
 
 #double deaths
 
-prob_2_2_k2 =  prob_1_1 ** 2  #The probability that two attacker's dice kills two defenders
+prob_2_2_k2 =  prob_1_1 ** 2
+# The probability that two attacker's dice kills two defenders
 
-prob_2_2_k0 = (1 - prob_1_1) ** 2  #The probability that two attacker's dice kills zero defenders
+prob_2_2_k0 = (1 - prob_1_1) ** 2
+# The probability that two attacker's dice kills zero defenders
 
-prob_2_2_k1 = 2 * (1 - prob_1_1) * prob_1_1  #The probability that two attacker's dice kills one defenders
+prob_2_2_k1 = 2 * (1 - prob_1_1) * prob_1_1
+# The probability that two attacker's dice kills one defenders
 
 
-prob_3_2_k2 = prob_1_1 * prob_2_1   #The probability that three attacker's dice kills two defenders
+prob_3_2_k2 = prob_1_1 * prob_2_1
+# The probability that three attacker's dice kills two defenders
 
-prob_3_2_k0 = (1-prob_1_1) * (1-prob_2_1)   #The probability that three attacker's dice kills zero defenders
+prob_3_2_k0 = (1-prob_1_1) * (1-prob_2_1)
+# The probability that three attacker's dice kills zero defenders
 
-prob_3_2_k1 = prob_1_1 * (1-prob_2_1) + (1-prob_1_1) * prob_2_1    #The probability that three attacker's dice kills one defenders
+prob_3_2_k1 = prob_1_1 * (1-prob_2_1) + (1-prob_1_1) * prob_2_1
+# The probability that three attacker's dice kills one defenders
+
+
+def dice_match(i,j):
+    '''Returns a tuple of the probability of possible outcomes: 0, 1 or 2 kills
+    for i attacking dice and j defending dice'''
+    assert i in (1, 2, 3) and j in (1, 2)
+    if i==3 and j ==2:
+        return (prob_3_2_k0, prob_3_2_k1, prob_3_2_k2)
+    elif i==3 and j==1:
+        return (1-prob_3_1, prob_3_1)
+    elif i==2 and j==2:
+        return (prob_2_2_k0, prob_2_2_k1, prob_2_2_k2)
+    elif i==2 and j==1:
+        return (1-prob_2_1, prob_2_1)
+    elif i==1 and j==2:
+        return (1-prob_1_2, prob_1_2)
+    elif i==1 and j==1:
+        return (1-prob_1_1, prob_1_1)
+
+
+
+
+def kill_counter(i, j, k):
+    '''Returns the probability of k kills for i attacking dice and j defending dice'''
+    return dice_match(i, j)[k]
+
+def death_counter(i, j, m):
+    '''Returns the probability of m deaths for i attacking dice and j defending dice'''
+    return dice_match(i, j)[-m-1]
+
+
+def zip_alternator(list_1, list_2):
+    '''zips two lists that contain both floats and arrays'''
+    return [list(zip(p,q)) if type(p) == np.ndarray else (p,q)  for (p, q) in zip(list_1, list_2)]
+
+def power_lists(a, d, m):
+    '''Returns all the x, y, z, v, w that must be iterated over to calculate the correct probabilities'''
+    
+    if a>=3 and a-m>=3:
+        list_z = np.arange(0, min(d, m)+1)
+        list_v = [(d+z)%2 for z in list_z]
+        list_x = [(d-z-v)/2 for z, v in zip(list_z, list_v)]
+        list_w = [0 if (d+z)%2 == 0 else np.arange((z+m)%2, m+1-z, 2) for z in list_z]
+        list_y = [(m-z-w)/2 for z, w in zip(list_z, list_w)]
+        return [list_x, list_y, list_z, list_v, list_w]
+    
+    elif a>=3 and a-m==2:
+        if d%2 == 1:
+            list_z = np.arange(0, min(d, m)+1, 2)
+        elif d%2 == 0:
+            list_z = np.arange(1, min(d, m)+1, 2)
+
+        list_u = []
+        list_x = [(d-z-1)/2 for z in list_z]
+        list_w = [1-v for v in list_v]
+        list_v = [0 if   else 1 for    in list_z]
+
+        list_y =
+
+
+#comment
+        pass
+    elif a>=3 and a-m==1:
+        pass
+    elif a==2 and a-m==2:
+        pass
+    elif a==2 and a-m==1:
+        pass
+    elif a==1 and a-m==1:
+        pass
+    
+def end_games(a, d, m):
+    if 
+    
+    
+def power_tuples()
+
+        
+        
+def probability_outcome(a, d, m):
+    if a>=3 and a-m>=3:
+        if d%2==0:
+            sum([kill_counter(3, 2, 2)**(x) * death_counter(3, 2, 1) ** ()]for x in range(d/2))
+            
+            return 
+        elif d%1==1:
+            return
+
+
+        
+
 
 
 def probability_calculator(a,d):
     '''Returns the probability that a attackers beats d defenders'''
+
     return None
